@@ -13,7 +13,7 @@ public class PetDbHelper extends SQLiteOpenHelper {
     /** Database version */
     private static final int DATABASE_VERSION = 1;
     /** CREATE table SQL statement */
-    private static final String SQL_CREATE_PETS_TABLE = "CREATE TABLE " + PetEntry.TABLE_NAME + " ("
+    private String SQL_CREATE_PETS_TABLE = "CREATE TABLE " + PetEntry.TABLE_NAME + " ("
             + PetEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PetEntry.COLUMN_PET_NAME + " TEXT NOT NULL, "
             + PetEntry.COLUMN_PET_BREED + " TEXT, "
@@ -27,9 +27,9 @@ public class PetDbHelper extends SQLiteOpenHelper {
 
     /** Called when the database is created */
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+    public void onCreate(SQLiteDatabase db) {
         // Execute the SQL statement
-        sqLiteDatabase.execSQL(SQL_CREATE_PETS_TABLE);
+        db.execSQL(SQL_CREATE_PETS_TABLE);
     }
 
     /** Called when the database version changes */
