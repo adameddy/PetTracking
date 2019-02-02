@@ -56,8 +56,6 @@ public class CatalogActivity extends AppCompatActivity {
      * the pets database.
      */
     private void displayDatabaseInfo() {
-        // Create and/or open a database to read from it
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
@@ -69,22 +67,8 @@ public class CatalogActivity extends AppCompatActivity {
                 PetEntry.COLUMN_PET_WEIGHT
         };
 
-        // Filter results WHERE
-        //String selection = PetEntry.COLUMN_PET_NAME + " = ?";
-        //String[] selectionArgs = { null };
-
-        // How you want the results sorted in the resulting Cursor
-        //String sortOrder = PetEntry._ID + " DESC";
-
-        Cursor cursor = db.query(
-                PetEntry.TABLE_NAME,    // The table to query
-                projection,             // The array of columns to return (pass null to get all)
-                null,              // The columns for the WHERE clause
-                null,          // The values for the WHERE clause
-                null,            // don't group the rows
-                null,             // don't filter by row groups
-                null               // The sort order
-        );
+        // Performs a query on the provider using the ContentResolver.
+       Cursor cursor = getContentResolver().query(PetEntry.CONTENT_URI,projection,null,null,null);
 
         TextView displayView = (TextView) findViewById(R.id.text_view_pet);
 
